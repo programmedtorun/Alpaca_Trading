@@ -9,11 +9,13 @@ import os
 import alpaca_trade_api as tradeapi
 
 
-
 secrets_filename = 'KEY_FILE.json'
 api_keys = {}
 with open(secrets_filename, 'r') as f:
     api_keys = json.loads(f.read())
+os.environ["APCA_API_KEY_ID"] = api_keys['API_KEY_ID']
+os.environ["APCA_API_SECRET_KEY"] = api_keys['SECRET_KEY']
+os.environ["APCA_API_BASE_URL"] = "https://paper-api.alpaca.markets"
 
 # print(api_keys['API_KEY_ID'])
 
@@ -34,9 +36,7 @@ def acct_status():
     #              )
     # print(type(obj))
     # seting env variables, will move these outside script
-    os.environ["APCA_API_KEY_ID"] = api_keys['API_KEY_ID']
-    os.environ["APCA_API_SECRET_KEY"] = api_keys['SECRET_KEY']
-    os.environ["APCA_API_BASE_URL"] = "https://paper-api.alpaca.markets"
+
     api = tradeapi.REST()
     account = api.get_account()
     print(account.status)
