@@ -24,14 +24,14 @@ r = requests.get(ACCOUNT_URL, headers=
                 {"APCA-API-KEY-ID": api_keys['API_KEY_ID'],
                 "APCA-API-SECRET-KEY": api_keys['SECRET_KEY']}
                  )
-print(r.content)
+print("requests.models.Response object - Account information --> {}".format(r.content))
 
 
 #  ------------- Using alpaca_trade_api -------------
 def acct_status():
     api = tradeapi.REST()
     account = api.get_account()
-    print(account.status)
+    print("Account status is --> {}".format(account.status))
 
 
 acct_status()
