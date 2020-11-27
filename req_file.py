@@ -31,6 +31,15 @@ print("requests.models.Response object - Account information --> {}".format(r.co
 def acct_status():
     api = tradeapi.REST()
     account = api.get_account()
+    if account.trading_blocked:
+        print("account is blocked")
+    else:
+        print("account is not blocked")
+
+    active_assets = api.list_assets(status='active', tradable=true)
+    print("ACTIVE ASSET LISTING")
+    for a in active_assets:
+        print(a.symbol)
     print("Account status is --> {}".format(account.status))
 
 
