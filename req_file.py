@@ -36,7 +36,7 @@ def acct_status():
     else:
         print("account is not blocked")
 
-    active_assets = api.list_assets(status='active', tradable=true)
+    active_assets = api.list_assets(status='active', asset_class='us_equity')
     print("ACTIVE ASSET LISTING")
     for a in active_assets:
         print(a.symbol)
