@@ -1,6 +1,4 @@
-# import os
 import websocket, json, os
-# import alpaca_trade_api as trade_api
 
 
 secrets_filename = 'KEY_FILE.json'
@@ -11,7 +9,7 @@ os.environ["APCA_API_KEY_ID"] = api_keys['API_KEY_ID']
 os.environ["APCA_API_SECRET_KEY"] = api_keys['SECRET_KEY']
 os.environ["APCA_API_BASE_URL"] = "https://paper-api.alpaca.markets"
 
-def on_open(ws):
+def on_open():
     print("opened")
     auth_data = {
         "action" : "authenticate",
@@ -20,26 +18,46 @@ def on_open(ws):
     ws.send(json.dumps(auth_data))
 
 
-websocket.enableTrace(True)
-socket = "wss://data.alpaca.markets/stream"
-ws = websocket.WebSocket()
-ws_blah = websocket.WebSocketApp(socket, on_open=on_open(ws))
-ws_blah.run_forever()
+
+ws = websocket.WebSocketApp("ws://data.alpaca.markets/stream", on_open=on_open)
+ws.run_forever()
 print('hello')
 
 
-# def on_message(ws, message):
-#     print("rec a message")
-#     print(message)
 
-
-
-
-# ws = websocket.WebSocket()
+# ummmm okay this code works.....  ->
+# import websocket
+# try:
+#     import thread
+# except ImportError:
+#     import _thread as thread
+# import time
 #
-# ws = websocket.WebSocketApp(socket, on_open=on_open, on_message=on_message)  # , on_message=on_message, on_close=on_close
-# ws.on_open = on_open(ws)
-# ws.run_forever()
-# print("goodbye")
-
+# def on_message(ws, message):
+#     print(message)
+#
+# def on_error(ws, error):
+#     print(error)
+#
+# def on_close(ws):
+#     print("### closed ###")
+#
+# def on_open(ws):
+#     def run(*args):
+#         for i in range(3):
+#             time.sleep(1)
+#             ws.send("Hello %d" % i)
+#         time.sleep(1)
+#         ws.close()
+#         print("thread terminating...")
+#     thread.start_new_thread(run, ())
+#
+#
 # if __name__ == "__main__":
+#     websocket.enableTrace(True)
+#     ws = websocket.WebSocketApp("ws://echo.websocket.org/",
+#                               on_message = on_message,
+#                               on_error = on_error,
+#                               on_close = on_close)
+#     ws.on_open = on_open
+#     ws.run_forever()
