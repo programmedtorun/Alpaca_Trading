@@ -1,21 +1,30 @@
 # import os
-import websocket
+import websocket, json, os
 # import alpaca_trade_api as trade_api
 
 
+secrets_filename = 'KEY_FILE.json'
+api_keys = {}
+with open(secrets_filename, 'r') as f:
+    api_keys = json.loads(f.read())
+os.environ["APCA_API_KEY_ID"] = api_keys['API_KEY_ID']
+os.environ["APCA_API_SECRET_KEY"] = api_keys['SECRET_KEY']
+os.environ["APCA_API_BASE_URL"] = "https://paper-api.alpaca.markets"
+
 def on_open(ws):
     print("opened")
-    # auth_data = {
-    #     "action" : "authenticate",
-    #     "data" : {"key_id" : api_keys['API_KEY_ID'], "secret_key" : api_keys['SECRET_KEY']}
-    # }
-    # ws.send(json.dumps(auth_data))
+    auth_data = {
+        "action" : "authenticate",
+        "data" : {"key_id" : api_keys['API_KEY_ID'], "secret_key" : api_keys['SECRET_KEY']}
+    }
+    ws.send(json.dumps(auth_data))
 
 
-# websocket.enableTrace(True)
+websocket.enableTrace(True)
 socket = "wss://data.alpaca.markets/stream"
-ws = websocket.WebSocketApp(socket, on_open=on_open)
-ws.run_forever()
+ws = websocket.WebSocket()
+ws_blah = websocket.WebSocketApp(socket, on_open=on_open(ws))
+ws_blah.run_forever()
 print('hello')
 
 
@@ -24,13 +33,7 @@ print('hello')
 #     print(message)
 
 
-# secrets_filename = 'KEY_FILE.json'
-# api_keys = {}
-# with open(secrets_filename, 'r') as f:
-#     api_keys = json.loads(f.read())
-# os.environ["APCA_API_KEY_ID"] = api_keys['API_KEY_ID']
-# os.environ["APCA_API_SECRET_KEY"] = api_keys['SECRET_KEY']
-# os.environ["APCA_API_BASE_URL"] = "https://paper-api.alpaca.markets"
+
 
 # ws = websocket.WebSocket()
 #
