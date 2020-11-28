@@ -47,6 +47,7 @@ def acct_status():
     #     print(a.symbol)
     print("Account status is --> {}".format(account.status))
 
+
 #  ------------- order stock -------------
 def buy(symbol, side, type, qty, time_in_force):
     api = tradeapi.REST()
