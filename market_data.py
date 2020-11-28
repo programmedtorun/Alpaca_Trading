@@ -16,6 +16,7 @@ def on_open(ws):
 socket = "wss://data.alpaca.markets/stream"
 ws = websocket.WebSocketApp(socket, on_open=on_open)
 ws.run_forever()
+print('hello')
 
 
 # def on_message(ws, message):
