@@ -1,5 +1,4 @@
 import json
-import requests
 import os
 import alpaca_trade_api as tradeapi
 import logging
@@ -40,7 +39,7 @@ def acct_status():
 
 
 #  ------------- order stock -------------
-def buy(symbol, side, type, qty, time_in_force):
+def trade(symbol, side, type, qty, time_in_force):
     api = tradeapi.REST()
     # all_pos = api.list_positions()
     # print(all_pos)
@@ -59,6 +58,6 @@ def buy(symbol, side, type, qty, time_in_force):
 
 
 acct_status()
-# buy IBM stock
-# buy('IBM', 'buy', 'market', 20, 'day')
+# example trade - running file to make trades, uncomment and add your parameters
+# trade('TEAM', 'sell', 'market', 1, 'gtc')
 
