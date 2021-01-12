@@ -4,3 +4,42 @@ import yfinance as yf
 import datetime as dt
 from pandas_datareader import data as pdr
 
+yf.pdr_override()
+
+stock = input("Enter a ticker: ")
+print(stock)
+start_year = input("Enter a start year: ")
+print(start_year)
+start_month = input("Enter a start month: ")
+print(start_month)
+start_day = input("Enter a start day: ")
+print(start_day)
+
+
+start = dt.datetime(int(start_year), int(start_month), int(start_day))
+now = dt.datetime.now()
+
+df = pdr.get_data_yahoo(stock, start, now)
+
+moving_avg = 50
+
+sma_string = "SMA_" + str(moving_avg)
+
+df[sma_string] = df.iloc[:,4].rolling(window=moving_avg).mean()
+
+df = df.iloc[moving_avg:]
+
+print(df)
+
+
+num_h = 0
+num_c = 0
+for i in df.index:
+    if df["Adj Close"][i] > df[sma_string][i]:
+        print("The close: {} is higher than the {}: {}. ".format(df["Adj Close"][i], sma_string, df[sma_string][i]))
+        num_h += 1
+    else:
+        print("The close is lower than the {}".format(sma_string))
+        num_c += 1
+print(num_h)
+print(num_c)
