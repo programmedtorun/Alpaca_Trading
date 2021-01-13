@@ -59,5 +59,5 @@ def trade(symbol, side, type, qty, time_in_force):
 
 acct_status()
 # example trade - running file to make trades, uncomment and add your parameters
-# trade('TEAM', 'sell', 'market', 1, 'gtc')
+# trade('FTFT', 'buy', 'market', 20, 'gtc')
 
