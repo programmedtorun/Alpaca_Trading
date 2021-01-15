@@ -1,4 +1,6 @@
 KEY_FILE.json
 LIVE_KEY_FILE.json
+RAPID_KEY.json
+.idea
 .DS_Store
 *.log

@@ -61,6 +61,8 @@ for i in stock_list.index:
         high_of_52week = max(df["Adj Close"][-260:])
 
         print("Checking stock {}".format(stock))
+
+        print(df)
         try:
             moving_average_200_20 = df["SMA_200"][-20]
         except Exception:
@@ -118,6 +120,7 @@ for i in stock_list.index:
         print("No data on " + stock)
 
 print(exportList)
+
 
 # newFile = os.path.dirname(filePath) + "/ScreenOutput.xlsx"
 #
